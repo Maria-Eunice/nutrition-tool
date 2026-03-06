@@ -2,7 +2,7 @@ import { useState, useMemo, useRef } from "react";
 import { CalendarDays, BarChart3, ChevronLeft, ChevronRight, Printer } from "lucide-react";
 import { startOfWeek, addWeeks, subWeeks, addDays, eachDayOfInterval, format, isThisWeek } from "date-fns";
 import { useReactToPrint } from "react-to-print";
-import { C, font } from "../data/brand";
+import { C, font, text, border } from "../data/brand";
 import { BK_COMPS, LN_COMPS, MILK_ITEM } from "../data/constants";
 import { useAppStore } from "../store/useAppStore";
 import { SectionHeader } from "../components/ui/SectionHeader";
@@ -72,17 +72,17 @@ export const MenuPlannerView = () => {
         <td colSpan={weekDays.length + 1} className="px-3 pt-5 pb-2">
           <div className="flex items-center gap-2">
             <span className="text-lg">{emoji}</span>
-            <span className="font-bold text-base" style={{ fontFamily: font.header, color: C.slate }}>{label}</span>
+            <span className="font-bold text-base" style={{ fontFamily: font.header, color: text.primary }}>{label}</span>
             <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full text-white" style={{ backgroundColor: C.green }}>{comps.length} components</span>
           </div>
         </td>
       </tr>
       {comps.map((comp) => (
-        <tr key={comp.key} style={{ borderTop: `1px solid ${C.slate}10` }}>
+        <tr key={comp.key} style={{ borderTop: `1px solid ${border.default}` }}>
           <td className="p-2 pl-3 w-40">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: comp.color }} />
-              <span className="text-sm font-semibold" style={{ fontFamily: font.body, color: C.slate }}>{comp.label}</span>
+              <span className="text-sm font-semibold" style={{ fontFamily: font.body, color: text.primary }}>{comp.label}</span>
             </div>
           </td>
           {weekDays.map((day) => {
@@ -91,7 +91,7 @@ export const MenuPlannerView = () => {
             const val = menu[k] || "";
             const opts = byC[comp.cat] || [];
             return (
-              <td key={dk} className="p-1.5" style={{ borderLeft: `1px solid ${C.slate}08` }}>
+              <td key={dk} className="p-1.5" style={{ borderLeft: `1px solid ${border.default}` }}>
                 <Sel value={val} onChange={(e) => setMenuSlot(k, e.target.value)} className="w-full text-xs h-8"
                   style={val ? { borderColor: comp.color, borderWidth: 2, backgroundColor: `${comp.color}08` } : {}}>
                   <option value="">—</option>
@@ -111,9 +111,9 @@ export const MenuPlannerView = () => {
               {n.calories > 0 ? (
                 <div className="text-xs space-y-0.5" style={{ fontFamily: font.body }}>
                   <div className="font-bold" style={{ color: C.green }}>{n.calories} cal</div>
-                  <div style={{ color: `${C.slate}77` }}>Na: {n.sodium}mg</div>
+                  <div style={{ color: text.secondary }}>Na: {n.sodium}mg</div>
                 </div>
-              ) : <span className="text-xs" style={{ color: `${C.slate}33` }}>—</span>}
+              ) : <span className="text-xs" style={{ color: text.muted }}>—</span>}
             </td>
           );
         })}
@@ -128,10 +128,10 @@ export const MenuPlannerView = () => {
       {/* ── Week navigation header ── */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
         <div>
-          <h2 className="text-lg font-bold" style={{ fontFamily: font.header, color: C.slate }}>
+          <h2 className="text-lg font-bold" style={{ fontFamily: font.header, color: text.primary }}>
             Week of {format(weekStart, "MMMM d, yyyy")}
           </h2>
-          <p className="text-xs mt-0.5" style={{ fontFamily: font.body, color: `${C.slate}77` }}>
+          <p className="text-xs mt-0.5" style={{ fontFamily: font.body, color: text.secondary }}>
             Assign recipes to breakfast (4 components) and lunch (5 components) for each day
           </p>
         </div>
@@ -148,7 +148,7 @@ export const MenuPlannerView = () => {
             onClick={() => setWeekStart(addWeeks(weekStart, 1))}>
             Next
           </Btn>
-          <span className="w-px h-6 mx-1" style={{ backgroundColor: `${C.slate}20` }} />
+          <span className="w-px h-6 mx-1" style={{ backgroundColor: border.medium }} />
           <Btn variant="secondary" className="text-xs px-3 py-1.5" icon={Printer} onClick={() => handlePrint()}>
             Print Weekly Menu
           </Btn>
@@ -183,10 +183,10 @@ export const MenuPlannerView = () => {
                     {t.calories > 0 ? (
                       <div className="space-y-0.5">
                         <div className="text-sm font-black" style={{ color: C.green, fontFamily: font.header }}>{t.calories} cal</div>
-                        <div className="text-xs" style={{ color: `${C.slate}77` }}>Na: {t.sodium}mg</div>
-                        <div className="text-xs" style={{ color: `${C.slate}77` }}>SF: {t.saturatedFat.toFixed(1)}g</div>
+                        <div className="text-xs" style={{ color: text.secondary }}>Na: {t.sodium}mg</div>
+                        <div className="text-xs" style={{ color: text.secondary }}>SF: {t.saturatedFat.toFixed(1)}g</div>
                       </div>
-                    ) : <span className="text-xs" style={{ color: `${C.slate}33` }}>—</span>}
+                    ) : <span className="text-xs" style={{ color: text.muted }}>—</span>}
                   </td>
                 );
               })}
@@ -198,7 +198,7 @@ export const MenuPlannerView = () => {
       {/* ── Legend ── */}
       <div className="mt-4 flex flex-wrap gap-4">
         {[...BK_COMPS, ...LN_COMPS].filter((c, i, a) => a.findIndex((x) => x.cat === c.cat) === i).map((comp) => (
-          <div key={comp.cat} className="flex items-center gap-1.5 text-xs" style={{ color: `${C.slate}88`, fontFamily: font.body }}>
+          <div key={comp.cat} className="flex items-center gap-1.5 text-xs" style={{ color: text.secondary, fontFamily: font.body }}>
             <span className="w-3 h-3 rounded-full" style={{ backgroundColor: comp.color }} />{comp.label}
           </div>
         ))}

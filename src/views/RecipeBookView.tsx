@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef } from "react";
 import { BookOpen, Search, Trash2, Upload, Download, Plus, Pencil, LayoutGrid, Table } from "lucide-react";
 import { format } from "date-fns";
-import { C, font } from "../data/brand";
+import { C, font, surface, text, border } from "../data/brand";
 import { COMP_LABELS } from "../data/constants";
 import { useAppStore, getMenuSlotsUsingRecipe } from "../store/useAppStore";
 import { parseCSV, downloadCSVTemplate } from "../utils/csv";
@@ -53,16 +53,16 @@ export const RecipeBookView = () => {
       {/* ── Toolbar ── */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <div className="flex items-center gap-3">
-          <p className="text-sm" style={{ fontFamily: font.body, color: `${C.slate}99` }}>{recipes.length} recipes in your collection</p>
+          <p className="text-sm" style={{ fontFamily: font.body, color: text.secondary }}>{recipes.length} recipes in your collection</p>
 
           {/* View mode toggle */}
-          <div className="inline-flex rounded-lg border overflow-hidden" style={{ borderColor: `${C.slate}22` }}>
+          <div className="inline-flex rounded-lg border overflow-hidden" style={{ borderColor: border.medium }}>
             <button
               className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold transition-colors"
               style={{
                 fontFamily: font.body,
-                backgroundColor: viewMode === "grid" ? C.blue : "transparent",
-                color: viewMode === "grid" ? "#fff" : `${C.slate}88`,
+                backgroundColor: viewMode === "grid" ? C.blue : surface.card,
+                color: viewMode === "grid" ? "#fff" : text.secondary,
               }}
               onClick={() => setViewMode("grid")}
               title="Card grid view"
@@ -74,9 +74,9 @@ export const RecipeBookView = () => {
               className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold transition-colors"
               style={{
                 fontFamily: font.body,
-                backgroundColor: viewMode === "table" ? C.blue : "transparent",
-                color: viewMode === "table" ? "#fff" : `${C.slate}88`,
-                borderLeft: `1px solid ${C.slate}22`,
+                backgroundColor: viewMode === "table" ? C.blue : surface.card,
+                color: viewMode === "table" ? "#fff" : text.secondary,
+                borderLeft: `1px solid ${border.medium}`,
               }}
               onClick={() => setViewMode("table")}
               title="Table view"
@@ -108,7 +108,7 @@ export const RecipeBookView = () => {
       {viewMode === "grid" && (
         <>
           <div className="relative max-w-md mb-5">
-            <Search size={16} className="absolute left-3 top-3" style={{ color: `${C.slate}55` }} />
+            <Search size={16} className="absolute left-3 top-3" style={{ color: text.muted }} />
             <Input placeholder="Search recipes..." value={search} onChange={e => setSearch(e.target.value)} className="pl-9" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -132,18 +132,18 @@ export const RecipeBookView = () => {
                 </div>
                 <div className="p-5" onClick={() => setViewRecipe(r)}>
                   <div className="flex items-start justify-between mb-3 pr-16">
-                    <h3 className="font-bold text-base leading-tight" style={{ fontFamily: font.header, color: C.slate }}>{r.name}</h3>
+                    <h3 className="font-bold text-base leading-tight" style={{ fontFamily: font.header, color: text.primary }}>{r.name}</h3>
                     <Badge color={C.blue}>{r.category}</Badge>
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-center">
                     {[{ l: "Yield", v: r.yield }, { l: "Cal/srv", v: r.nutrition.calories }, { l: "Na mg", v: r.nutrition.sodium }].map(({ l, v }) => (
                       <div key={l} className="rounded-lg p-2" style={{ backgroundColor: C.lightBlue }}>
                         <div className="text-lg font-bold" style={{ color: C.green, fontFamily: font.header }}>{v}</div>
-                        <div className="text-xs" style={{ color: `${C.slate}88`, fontFamily: font.body }}>{l}</div>
+                        <div className="text-xs" style={{ color: text.secondary, fontFamily: font.body }}>{l}</div>
                       </div>
                     ))}
                   </div>
-                  <div className="mt-3 text-xs" style={{ color: `${C.slate}77`, fontFamily: font.body }}>Serving: {r.servingSize}</div>
+                  <div className="mt-3 text-xs" style={{ color: text.secondary, fontFamily: font.body }}>Serving: {r.servingSize}</div>
                 </div>
               </Card>
             ))}

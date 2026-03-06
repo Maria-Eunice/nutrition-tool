@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { C, font } from "../../data/brand";
+import { font, text, border } from "../../data/brand";
 import { useAppStore } from "../../store/useAppStore";
 import { Dialog } from "./Dialog";
 import { Input } from "./Input";
@@ -76,7 +76,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
     <Dialog open={open} onClose={onClose} title={isEdit ? "Edit Recipe" : "New Recipe"}>
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold mb-1" style={{ fontFamily: font.body, color: C.slate }}>
+          <label className="block text-sm font-semibold mb-1" style={{ fontFamily: font.body, color: text.primary }}>
             Recipe Name
           </label>
           <Input
@@ -88,7 +88,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
         </div>
 
         <div>
-          <label className="block text-sm font-semibold mb-1" style={{ fontFamily: font.body, color: C.slate }}>
+          <label className="block text-sm font-semibold mb-1" style={{ fontFamily: font.body, color: text.primary }}>
             Category
           </label>
           <Sel value={category} onChange={(e) => setCategory(e.target.value)} className="w-full">
@@ -100,7 +100,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-semibold mb-1" style={{ fontFamily: font.body, color: C.slate }}>
+            <label className="block text-sm font-semibold mb-1" style={{ fontFamily: font.body, color: text.primary }}>
               Yield (servings)
             </label>
             <Input
@@ -111,7 +111,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold mb-1" style={{ fontFamily: font.body, color: C.slate }}>
+            <label className="block text-sm font-semibold mb-1" style={{ fontFamily: font.body, color: text.primary }}>
               Serving Size
             </label>
             <Input
@@ -122,7 +122,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
           </div>
         </div>
 
-        <div className="flex justify-end gap-3 pt-3 border-t" style={{ borderColor: `${C.slate}12` }}>
+        <div className="flex justify-end gap-3 pt-3 border-t" style={{ borderColor: border.default }}>
           <Btn variant="outline" onClick={onClose}>Cancel</Btn>
           <Btn variant="primary" onClick={handleSave} disabled={!name.trim()}>
             {isEdit ? "Save Changes" : "Add Recipe"}

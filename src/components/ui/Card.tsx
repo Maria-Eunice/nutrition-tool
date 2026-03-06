@@ -1,5 +1,5 @@
-import { C } from "../../data/brand";
+import { surface, border } from "../../data/brand";
 
 export const Card = ({ children, className = "", ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={`bg-white rounded-xl border shadow-sm ${className}`} style={{ borderColor: `${C.slate}12` }} {...props}>{children}</div>
+  <div className={`rounded-xl border shadow-sm ${className}`} style={{ backgroundColor: surface.card, borderColor: border.default, boxShadow: "var(--shadow-card)" }} {...props}>{children}</div>
 );

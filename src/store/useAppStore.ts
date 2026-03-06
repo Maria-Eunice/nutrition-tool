@@ -7,6 +7,7 @@ interface AppState {
   // Persisted
   recipes: Recipe[];
   menu: MenuMap;
+  darkMode: boolean;
 
   // UI (not persisted)
   viewRecipe: Recipe | null;
@@ -20,6 +21,7 @@ interface AppState {
   setViewRecipe: (recipe: Recipe | null) => void;
   toggleSidebar: () => void;
   setSidebarOpen: (open: boolean) => void;
+  toggleDarkMode: () => void;
   resetAll: () => void;
   importRecipes: (recipes: Recipe[]) => void;
 }
@@ -29,6 +31,7 @@ export const useAppStore = create<AppState>()(
     (set) => ({
       recipes: INITIAL_RECIPES,
       menu: {},
+      darkMode: false,
       viewRecipe: null,
       sidebarOpen: false,
 
@@ -55,6 +58,7 @@ export const useAppStore = create<AppState>()(
       setViewRecipe: (recipe) => set({ viewRecipe: recipe }),
       toggleSidebar: () => set((s) => ({ sidebarOpen: !s.sidebarOpen })),
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
+      toggleDarkMode: () => set((s) => ({ darkMode: !s.darkMode })),
       resetAll: () => set({ menu: {}, recipes: INITIAL_RECIPES }),
       importRecipes: (newRecipes) =>
         set((s) => ({ recipes: [...s.recipes, ...newRecipes] })),
@@ -64,6 +68,7 @@ export const useAppStore = create<AppState>()(
       partialize: (state) => ({
         recipes: state.recipes,
         menu: state.menu,
+        darkMode: state.darkMode,
       }),
     }
   )

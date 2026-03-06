@@ -1,8 +1,8 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import { BookOpen, ChefHat, CheckCircle, CalendarDays, BarChart3, Leaf, Edit, Printer } from "lucide-react";
-import { C, font } from "./data/brand";
+import { C, font, surface, text, border } from "./data/brand";
 import { useAppStore } from "./store/useAppStore";
 import { HeaderBar } from "./components/layout/HeaderBar";
 import { Dialog } from "./components/ui/Dialog";
@@ -31,6 +31,7 @@ export default function App() {
   const sidebarOpen = useAppStore((s) => s.sidebarOpen);
   const setSidebarOpen = useAppStore((s) => s.setSidebarOpen);
   const resetAll = useAppStore((s) => s.resetAll);
+  const darkMode = useAppStore((s) => s.darkMode);
   const recipes = useAppStore((s) => s.recipes);
   const menu = useAppStore((s) => s.menu);
   const mainRef = useRef<HTMLElement>(null);
@@ -46,6 +47,10 @@ export default function App() {
     `,
   });
 
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+  }, [darkMode]);
+
   const handlePrint = () => window.print();
   const handleSaveFile = () => {
     const data = JSON.stringify({ recipes, menu }, null, 2);
@@ -55,12 +60,12 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden" style={{ backgroundColor: "#f8f9fa", fontFamily: font.body }}>
+    <div className="flex flex-col h-screen overflow-hidden" style={{ backgroundColor: surface.page, fontFamily: font.body }}>
       <HeaderBar onReset={resetAll} onPrint={handlePrint} onSave={handleSaveFile} />
       <div className="flex flex-1 overflow-hidden">
-        {sidebarOpen && <div className="fixed inset-0 bg-black/30 z-30 lg:hidden" onClick={() => setSidebarOpen(false)} />}
+        {sidebarOpen && <div className="fixed inset-0 z-30 lg:hidden" style={{ backgroundColor: "var(--overlay)" }} onClick={() => setSidebarOpen(false)} />}
         {/* Sidebar */}
-        <aside className={`fixed lg:static inset-y-0 left-0 z-40 w-60 flex flex-col transform transition-transform lg:transform-none ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`} style={{ backgroundColor: C.slate }}>
+        <aside className={`fixed lg:static inset-y-0 left-0 z-40 w-60 flex flex-col transform transition-transform lg:transform-none ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`} style={{ backgroundColor: surface.sidebar }}>
           <div className="p-5 border-b" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
             <div className="flex items-center justify-center gap-1">
               <span className="text-lg font-black tracking-tight" style={{ fontFamily: font.header, fontWeight: 900, color: C.green }}>
@@ -99,8 +104,8 @@ export default function App() {
 
         {/* Main */}
         <main className="flex-1 overflow-auto" ref={mainRef}>
-          <div className="lg:hidden p-3 border-b bg-white sticky top-0 z-20" style={{ borderColor: `${C.slate}12` }}>
-            <button onClick={() => setSidebarOpen(true)} className="p-2 rounded-lg hover:bg-gray-100" style={{ color: C.slate }}>
+          <div className="lg:hidden p-3 border-b sticky top-0 z-20" style={{ backgroundColor: surface.card, borderColor: border.default }}>
+            <button onClick={() => setSidebarOpen(true)} className="p-2 rounded-lg" style={{ color: text.primary }}>
               <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12h18M3 6h18M3 18h18" /></svg>
             </button>
           </div>
@@ -123,12 +128,12 @@ export default function App() {
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <Badge color={C.blue}>{viewRecipe.category}</Badge>
-                <span className="text-sm" style={{ color: `${C.slate}88`, fontFamily: font.body }}>Yield: {viewRecipe.yield} | {viewRecipe.servingSize}</span>
+                <span className="text-sm" style={{ color: text.secondary, fontFamily: font.body }}>Yield: {viewRecipe.yield} | {viewRecipe.servingSize}</span>
               </div>
               <h4 className="font-bold text-sm mb-2" style={{ fontFamily: font.header, color: C.blue }}>Ingredients</h4>
               <div className="space-y-1">
                 {viewRecipe.ingredients.map((ing, i) => (
-                  <div key={i} className="text-sm py-1 border-b" style={{ fontFamily: font.body, color: C.slate, borderColor: `${C.slate}10` }}>{ing.qty} {ing.unit} — {ing.name}</div>
+                  <div key={i} className="text-sm py-1 border-b" style={{ fontFamily: font.body, color: text.primary, borderColor: border.default }}>{ing.qty} {ing.unit} — {ing.name}</div>
                 ))}
               </div>
               <div className="flex gap-2 mt-4">
