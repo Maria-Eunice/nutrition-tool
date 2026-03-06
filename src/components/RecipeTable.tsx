@@ -11,7 +11,7 @@ import {
   type ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Pencil, Trash2, ChevronUp, ChevronDown, ChevronsUpDown } from "lucide-react";
-import { C, font } from "../data/brand";
+import { C, font, surface, text, border } from "../data/brand";
 import { Btn } from "./ui/Btn";
 import type { Recipe } from "../types";
 
@@ -33,7 +33,7 @@ export const RecipeTable = ({ recipes, onView, onEdit, onDelete }: RecipeTablePr
         accessorKey: "name",
         header: "Recipe Name",
         cell: (info) => (
-          <span className="font-semibold" style={{ color: C.slate }}>
+          <span className="font-semibold" style={{ color: text.primary }}>
             {info.getValue() as string}
           </span>
         ),
@@ -126,12 +126,12 @@ export const RecipeTable = ({ recipes, onView, onEdit, onDelete }: RecipeTablePr
   return (
     <div>
       {/* Table */}
-      <div className="border rounded-xl overflow-hidden" style={{ borderColor: `${C.slate}15` }}>
+      <div className="border rounded-xl overflow-hidden" style={{ borderColor: border.default }}>
         <table className="w-full text-sm" style={{ fontFamily: font.body }}>
           <thead>
             {/* Header row */}
             {table.getHeaderGroups().map((hg) => (
-              <tr key={hg.id} style={{ backgroundColor: C.lightBlue }}>
+              <tr key={hg.id} style={{ backgroundColor: "var(--bg-table-header)" }}>
                 {hg.headers.map((header) => (
                   <th key={header.id} className="text-left text-xs font-semibold" style={{ color: C.blue }}>
                     {header.isPlaceholder ? null : (
@@ -157,8 +157,9 @@ export const RecipeTable = ({ recipes, onView, onEdit, onDelete }: RecipeTablePr
                               className="w-full h-7 rounded border px-2 text-xs font-normal focus:outline-none focus:ring-1"
                               style={{
                                 fontFamily: font.body,
-                                borderColor: `${C.slate}22`,
-                                color: C.slate,
+                                borderColor: border.medium,
+                                color: text.primary,
+                                backgroundColor: surface.input,
                               }}
                               placeholder={`Filter...`}
                               value={(header.column.getFilterValue() as string) ?? ""}
@@ -179,15 +180,15 @@ export const RecipeTable = ({ recipes, onView, onEdit, onDelete }: RecipeTablePr
             {table.getRowModel().rows.map((row, i) => (
               <tr
                 key={row.id}
-                className="border-t cursor-pointer hover:bg-blue-50/40 transition-colors"
+                className="border-t cursor-pointer transition-colors"
                 style={{
-                  borderColor: `${C.slate}10`,
-                  backgroundColor: i % 2 === 1 ? `${C.slate}04` : "transparent",
+                  borderColor: border.default,
+                  backgroundColor: i % 2 === 1 ? surface.hover : "transparent",
                 }}
                 onClick={() => onView(row.original)}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-3 py-2.5" style={{ color: C.slate }}>
+                  <td key={cell.id} className="px-3 py-2.5" style={{ color: text.primary }}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
@@ -195,7 +196,7 @@ export const RecipeTable = ({ recipes, onView, onEdit, onDelete }: RecipeTablePr
             ))}
             {table.getRowModel().rows.length === 0 && (
               <tr>
-                <td colSpan={columns.length} className="text-center py-8 text-sm" style={{ color: `${C.slate}66` }}>
+                <td colSpan={columns.length} className="text-center py-8 text-sm" style={{ color: text.muted }}>
                   No recipes match your filters.
                 </td>
               </tr>
@@ -206,7 +207,7 @@ export const RecipeTable = ({ recipes, onView, onEdit, onDelete }: RecipeTablePr
 
       {/* Pagination */}
       <div className="flex items-center justify-between mt-4">
-        <p className="text-xs" style={{ fontFamily: font.body, color: `${C.slate}88` }}>
+        <p className="text-xs" style={{ fontFamily: font.body, color: text.secondary }}>
           {table.getFilteredRowModel().rows.length} recipe{table.getFilteredRowModel().rows.length !== 1 ? "s" : ""}{" "}
           &middot; Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
         </p>
