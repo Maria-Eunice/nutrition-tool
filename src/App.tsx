@@ -11,6 +11,7 @@ import { RecipeBuilderView } from "./views/RecipeBuilderView";
 import { MealPatternView } from "./views/MealPatternView";
 import { MenuPlannerView } from "./views/MenuPlannerView";
 import { ReportsView } from "./views/ReportsView";
+import { HelpView } from "./views/HelpView";
 
 export default function App() {
   const resetAll = useAppStore((s) => s.resetAll);
@@ -70,6 +71,7 @@ export default function App() {
               <Route path="/checker" element={<MealPatternView />} />
               <Route path="/planner" element={<MenuPlannerView />} />
               <Route path="/reports" element={<ReportsView />} />
+              <Route path="/help" element={<HelpView />} />
             </Routes>
           </div>
         </main>
