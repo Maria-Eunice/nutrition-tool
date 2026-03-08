@@ -604,6 +604,8 @@ The compliance targets for each grade group, stored as constants (not user-edita
 
 The following are gaps in the current v1.0 release. They are documented here for transparency and to inform prioritisation of planned enhancements.
 
+> **⚠ Current deployment status:** SproutCNP v1.0 operates entirely in the browser using **simulated demo data** pre-loaded at first launch. It does not yet connect to a live cloud database. Completing the Supabase database integration (see Section 7.1) is the single highest-priority next step before the tool can be used in a real school nutrition programme with persistent, shared data.
+
 ### Data and Storage
 
 | # | Limitation | Impact |
@@ -718,7 +720,40 @@ All three tables have Row Level Security enabled so users can only see their own
 
 ---
 
-### 7.6 Additional Planned Features
+### 7.6 USDA Food Buying Guide Integration
+
+**What changes:** Connect SproutCNP to the [USDA Food Buying Guide for Child Nutrition Programs](https://www.fns.usda.gov/tn/food-buying-guide-for-child-nutrition-programs), the federal reference that defines purchase quantities, yield factors, and crediting information for foods served in school meals.
+
+**What this enables:**
+- Staff enter a target number of students and servings; the system calculates how many pounds, cases, or units to order for each ingredient
+- Yield factors (e.g. fresh broccoli loses 39% of its raw weight when trimmed and cooked) are applied automatically, so purchase quantities are accurate rather than underestimated
+- Serving sizes are cross-referenced against USDA crediting guidelines to confirm that a recipe's portion counts toward the correct meal pattern component
+- Procurement and compliance data are linked — a director can trace from a menu slot all the way back to an ingredient purchase quantity
+
+**Why it matters:** The Food Buying Guide is distinct from the FoodData Central nutrition database (Section 7.4). FoodData Central answers "what nutrients are in this food?" — the Food Buying Guide answers "how much do I need to buy to serve 300 students?" Both integrations together would give SproutCNP end-to-end procurement and compliance capability.
+
+---
+
+### 7.7 Multi-Language Support (Spanish)
+
+**What changes:** Internationalise the entire application UI using the [react-i18next](https://react.i18next.com/) framework, with Spanish as the first supported language after English.
+
+**What this enables:**
+- Every label, button, heading, error message, and tooltip is displayed in the user's chosen language
+- A language toggle in the header bar (or a Settings page) lets each user switch between English and Spanish independently of other users
+- Nutrition fact labels and printed menus can be generated in Spanish for parent-facing communications
+- The foundation is in place to add additional languages (Portuguese, Haitian Creole, Vietnamese, etc.) by supplying new translation files without touching the application code
+
+**Why Spanish first:** Spanish is the most widely spoken non-English language among school nutrition staff and school communities in the United States. USDA nutrition education materials are already published in Spanish, making translated guidance content readily available for reference. Removing the language barrier directly addresses Known Limitation #14 and expands the addressable user base to districts where the majority of cafeteria staff are Spanish-speaking.
+
+**Implementation notes:**
+- All UI strings would be extracted to a `src/locales/en.json` file (English) and `src/locales/es.json` (Spanish)
+- Date formatting (week headers, report dates) would be locale-aware using the `date-fns/locale` package, which already supports `es` locale
+- The user's language preference would be persisted in the Zustand store alongside `darkMode`
+
+---
+
+### 7.8 Additional Planned Features
 
 | Feature | Description |
 |---|---|
@@ -730,7 +765,6 @@ All three tables have Row Level Security enabled so users can only see their own
 | **Production records** | Record actual quantities served vs. planned; track waste; generate USDA-required production records |
 | **Historical reporting** | View and compare nutrition reports across any date range, not just the current week |
 | **PDF export** | Export menus and reports as PDF without using the browser's print dialog |
-| **Spanish language support** | Full UI translation into Spanish for districts with Spanish-speaking staff |
 
 ---
 
