@@ -6,7 +6,7 @@ import { useReactToPrint } from "react-to-print";
 import { ChefHat, Save, X, Printer } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { C, font } from "../data/brand";
-import { NDB } from "../data/constants";
+import { NDB, RECIPE_CATEGORIES, EMPTY_NUTRITION } from "../data/constants";
 import { useAppStore } from "../store/useAppStore";
 import { SectionHeader } from "../components/ui/SectionHeader";
 import { Card } from "../components/ui/Card";
@@ -49,8 +49,6 @@ export const recipeSchema = z.object({
 });
 
 type RecipeFormData = z.infer<typeof recipeSchema>;
-
-const EMPTY_NUTRITION: Nutrition = { calories: 0, totalFat: 0, saturatedFat: 0, transFat: 0, cholesterol: 0, sodium: 0, totalCarbs: 0, fiber: 0, totalSugars: 0, addedSugars: 0, protein: 0, vitaminD: 0, calcium: 0, iron: 0, potassium: 0 };
 
 const FieldError = ({ message }: { message?: string }) =>
   message ? <p className="text-red-500 text-xs mt-1">{message}</p> : null;
@@ -150,7 +148,7 @@ export const RecipeBuilderView = () => {
                 <div>
                   <label className="text-xs font-semibold mb-1 block" style={labelStyle}>Category</label>
                   <Sel {...register("category")} className="w-full">
-                    {["Entrée", "Grain", "WG Rich", "Vegetable", "Fruit", "Protein", "Milk"].map((c) => (
+                    {RECIPE_CATEGORIES.map((c) => (
                       <option key={c}>{c}</option>
                     ))}
                   </Sel>

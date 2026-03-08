@@ -1,6 +1,19 @@
 import { C } from "./brand";
 import type { MealComponent, UsdaLimits, Nutrition } from "../types";
 
+/** Recipe category options — shared by RecipeBuilderView and RecipeFormDialog. */
+export const RECIPE_CATEGORIES = [
+  "Entrée", "Grain", "WG Rich", "Vegetable", "Fruit", "Protein", "Milk",
+] as const;
+
+/** Zero-value nutrition object used as default/reset for new recipes. */
+export const EMPTY_NUTRITION: Nutrition = {
+  calories: 0, totalFat: 0, saturatedFat: 0, transFat: 0,
+  cholesterol: 0, sodium: 0, totalCarbs: 0, fiber: 0,
+  totalSugars: 0, addedSugars: 0, protein: 0, vitaminD: 0,
+  calcium: 0, iron: 0, potassium: 0,
+};
+
 export const USDA_LIMITS: Record<string, UsdaLimits> = {
   "K-5": { calories: { min: 550, max: 650 }, sodium: 1230, saturatedFatPct: 10, grainOz: 1, meatOz: 1, vegCup: 0.75, fruitCup: 0.5, milkCup: 1 },
   "6-8": { calories: { min: 600, max: 700 }, sodium: 1360, saturatedFatPct: 10, grainOz: 1, meatOz: 1, vegCup: 0.75, fruitCup: 0.5, milkCup: 1 },

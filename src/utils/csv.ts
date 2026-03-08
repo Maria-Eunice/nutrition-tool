@@ -13,6 +13,16 @@ const NUTRITION_KEYS: (keyof Nutrition)[] = [
   "vitaminD", "calcium", "iron", "potassium",
 ];
 
+/** Triggers a browser file-download for any Blob without needing a server. */
+export function downloadBlob(blob: Blob, filename: string): void {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export function downloadCSVTemplate() {
   const exampleRow = [
     "Chicken Tenders", "Entrée", "50", "3 pieces (85g)",
@@ -21,13 +31,7 @@ export function downloadCSVTemplate() {
     "0.1", "20", "1.2", "220",
   ];
   const csv = CSV_TEMPLATE_HEADERS.join(",") + "\n" + exampleRow.join(",") + "\n";
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "recipe-import-template.csv";
-  a.click();
-  URL.revokeObjectURL(url);
+  downloadBlob(new Blob([csv], { type: "text/csv;charset=utf-8;" }), "recipe-import-template.csv");
 }
 
 function splitCSVRow(line: string): string[] {

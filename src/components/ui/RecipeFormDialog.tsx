@@ -1,20 +1,12 @@
 import { useState, useEffect } from "react";
 import { font, text, border } from "../../data/brand";
+import { RECIPE_CATEGORIES, EMPTY_NUTRITION } from "../../data/constants";
 import { useAppStore } from "../../store/useAppStore";
 import { Dialog } from "./Dialog";
 import { Input } from "./Input";
 import { Sel } from "./Sel";
 import { Btn } from "./Btn";
-import type { Recipe, Nutrition } from "../../types";
-
-const CATEGORIES = ["Entrée", "Grain", "WG Rich", "Vegetable", "Fruit", "Protein", "Milk"];
-
-const ZERO_NUTRITION: Nutrition = {
-  calories: 0, totalFat: 0, saturatedFat: 0, transFat: 0,
-  cholesterol: 0, sodium: 0, totalCarbs: 0, fiber: 0,
-  totalSugars: 0, addedSugars: 0, protein: 0, vitaminD: 0,
-  calcium: 0, iron: 0, potassium: 0,
-};
+import type { Recipe } from "../../types";
 
 interface RecipeFormDialogProps {
   open: boolean;
@@ -27,7 +19,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
   const updateRecipe = useAppStore((s) => s.updateRecipe);
 
   const [name, setName] = useState("");
-  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [category, setCategory] = useState(RECIPE_CATEGORIES[0]);
   const [recipeYield, setRecipeYield] = useState(50);
   const [servingSize, setServingSize] = useState("1 serving");
 
@@ -41,7 +33,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
       setServingSize(recipe.servingSize);
     } else if (open) {
       setName("");
-      setCategory(CATEGORIES[0]);
+      setCategory(RECIPE_CATEGORIES[0]);
       setRecipeYield(50);
       setServingSize("1 serving");
     }
@@ -66,7 +58,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
         yield: recipeYield,
         servingSize: servingSize.trim(),
         ingredients: [],
-        nutrition: { ...ZERO_NUTRITION },
+        nutrition: { ...EMPTY_NUTRITION },
       });
     }
     onClose();
@@ -92,7 +84,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
             Category
           </label>
           <Sel value={category} onChange={(e) => setCategory(e.target.value)} className="w-full">
-            {CATEGORIES.map((c) => (
+            {RECIPE_CATEGORIES.map((c) => (
               <option key={c} value={c}>{c}</option>
             ))}
           </Sel>
