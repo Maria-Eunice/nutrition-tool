@@ -131,8 +131,10 @@ export const RecipeBookView = () => {
                   </button>
                 </div>
                 <div className="p-5" onClick={() => setViewRecipe(r)}>
-                  <div className="flex items-start justify-between mb-3 pr-16">
+                  <div className="pr-16 mb-1">
                     <h3 className="font-bold text-base leading-tight" style={{ fontFamily: font.header, color: text.primary }}>{r.name}</h3>
+                  </div>
+                  <div className="mb-3">
                     <Badge color={C.blue}>{r.category}</Badge>
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-center">
