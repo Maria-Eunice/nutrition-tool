@@ -1,3 +1,4 @@
+// Recipe Book: browse, search, import, and manage all saved recipes.
 import { useState, useMemo, useRef } from "react";
 import { BookOpen, Search, Trash2, Upload, Download, Plus, Pencil, LayoutGrid, Table } from "lucide-react";
 import { format } from "date-fns";
