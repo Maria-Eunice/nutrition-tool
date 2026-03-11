@@ -1,3 +1,4 @@
+// Recipe Builder: create and edit recipes with live nutrition label preview.
 import { useState, useRef } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
