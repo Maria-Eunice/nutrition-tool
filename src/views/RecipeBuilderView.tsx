@@ -20,27 +20,27 @@ import type { Nutrition } from "../types";
 /* ── Zod schema ── */
 
 const nutritionSchema = z.object({
-  calories: z.coerce.number().positive("Calories must be a positive number"),
-  totalFat: z.coerce.number().min(0),
-  saturatedFat: z.coerce.number().min(0),
-  transFat: z.coerce.number().min(0),
-  cholesterol: z.coerce.number().min(0),
-  sodium: z.coerce.number().min(0),
-  totalCarbs: z.coerce.number().min(0),
-  fiber: z.coerce.number().min(0),
-  totalSugars: z.coerce.number().min(0),
-  addedSugars: z.coerce.number().min(0),
-  protein: z.coerce.number().min(0),
-  vitaminD: z.coerce.number().min(0),
-  calcium: z.coerce.number().min(0),
-  iron: z.coerce.number().min(0),
-  potassium: z.coerce.number().min(0),
+  calories: z.number().positive("Calories must be a positive number"),
+  totalFat: z.number().min(0),
+  saturatedFat: z.number().min(0),
+  transFat: z.number().min(0),
+  cholesterol: z.number().min(0),
+  sodium: z.number().min(0),
+  totalCarbs: z.number().min(0),
+  fiber: z.number().min(0),
+  totalSugars: z.number().min(0),
+  addedSugars: z.number().min(0),
+  protein: z.number().min(0),
+  vitaminD: z.number().min(0),
+  calcium: z.number().min(0),
+  iron: z.number().min(0),
+  potassium: z.number().min(0),
 });
 
 export const recipeSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
   category: z.string(),
-  yield: z.coerce.number().positive("Yield must be greater than zero"),
+  yield: z.number().positive("Yield must be greater than zero"),
   servingSize: z.string().min(1, "Serving size is required"),
   ingredients: z
     .array(z.object({ name: z.string(), qty: z.number(), unit: z.string() }))
@@ -90,7 +90,7 @@ export const RecipeBuilderView = () => {
   /* Ensure nutrition values are numbers for the label component */
   const nutrition: Nutrition = Object.fromEntries(
     Object.entries(watchedNutritionRaw).map(([k, v]) => [k, Number(v) || 0])
-  ) as Nutrition;
+  ) as unknown as Nutrition;
 
   const handlePrint = useReactToPrint({
     contentRef: printRef,
@@ -155,7 +155,7 @@ export const RecipeBuilderView = () => {
                 </div>
                 <div>
                   <label className="text-xs font-semibold mb-1 block" style={labelStyle}>Yield</label>
-                  <Input type="number" step="any" {...register("yield")} />
+                  <Input type="number" step="any" {...register("yield", { valueAsNumber: true })} />
                   <FieldError message={errors.yield?.message} />
                 </div>
                 <div>
@@ -217,7 +217,7 @@ export const RecipeBuilderView = () => {
                 {(Object.keys(EMPTY_NUTRITION) as (keyof Nutrition)[]).map((k) => (
                   <div key={k}>
                     <label className="text-xs" style={{ color: `${C.slate}77`, fontFamily: font.body }}>{k}</label>
-                    <Input type="number" step="any" {...register(`nutrition.${k}`)} className="h-8 text-xs" />
+                    <Input type="number" step="any" {...register(`nutrition.${k}`, { valueAsNumber: true })} className="h-8 text-xs" />
                     {k === "calories" && <FieldError message={errors.nutrition?.calories?.message} />}
                   </div>
                 ))}

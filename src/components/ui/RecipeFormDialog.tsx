@@ -19,7 +19,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
   const updateRecipe = useAppStore((s) => s.updateRecipe);
 
   const [name, setName] = useState("");
-  const [category, setCategory] = useState(RECIPE_CATEGORIES[0]);
+  const [category, setCategory] = useState<string>(RECIPE_CATEGORIES[0]);
   const [recipeYield, setRecipeYield] = useState(50);
   const [servingSize, setServingSize] = useState("1 serving");
 
