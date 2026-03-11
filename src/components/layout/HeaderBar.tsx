@@ -17,8 +17,13 @@ export const HeaderBar = ({ onReset, onPrint, onSave }: HeaderBarProps) => {
   return (
     <div className="border-b px-4 py-3 flex flex-wrap items-center justify-between gap-3" style={{ backgroundColor: surface.card, borderColor: border.default }}>
       <Logo />
-      <div className="flex items-center gap-1 text-xs" style={{ color: text.secondary, fontFamily: font.body }}>
-        <Info size={12} /> info@sproutcnp.com
+      <div className="flex items-center gap-2">
+        <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold" style={{ backgroundColor: "#fef08a", color: "#854d0e", border: "1px solid #fde047", fontFamily: font.body }}>
+          Preview Test
+        </span>
+        <div className="flex items-center gap-1 text-xs" style={{ color: text.secondary, fontFamily: font.body }}>
+          <Info size={12} /> info@sproutcnp.com
+        </div>
       </div>
       <div className="flex items-center gap-2 flex-wrap">
         <button
