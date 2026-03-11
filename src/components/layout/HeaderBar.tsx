@@ -1,3 +1,4 @@
+// HeaderBar: top navigation bar with logo, dark mode toggle, and action buttons.
 import { RotateCcw, Printer, Save, Info, Sun, Moon } from "lucide-react";
 import { C, font, surface, text, border } from "../../data/brand";
 import { useAppStore } from "../../store/useAppStore";
