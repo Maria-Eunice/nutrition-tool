@@ -33,6 +33,16 @@ export const RecipeBookView = () => {
 
   const affectedSlots = deleteTarget ? getMenuSlotsUsingRecipe(menu, deleteTarget.name) : [];
 
+  const categoryColor: Record<string, string> = {
+    Vegetable: "#16a34a",
+    Grain:     "#ea580c",
+    "Entrée":  "#dc2626",
+    Fruit:     "#2563eb",
+    Milk:      "#7c3aed",
+    "WG Rich": "#ea580c",
+    Protein:   "#b45309",
+  };
+
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -136,7 +146,7 @@ export const RecipeBookView = () => {
                     <h3 className="font-bold text-base leading-tight" style={{ fontFamily: font.header, color: text.primary }}>{r.name}</h3>
                   </div>
                   <div className="mb-4">
-                    <Badge color={C.blue}>{r.category}</Badge>
+                    <Badge color={categoryColor[r.category] ?? C.blue}>{r.category}</Badge>
                   </div>
                   <div className="grid grid-cols-3 gap-3 text-center">
                     {[{ l: "Yield", v: r.yield }, { l: "Cal/srv", v: r.nutrition.calories }, { l: "Na mg", v: r.nutrition.sodium }].map(({ l, v }) => (
