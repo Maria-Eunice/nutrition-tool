@@ -16,14 +16,13 @@ import { RecipeFormDialog } from "../components/ui/RecipeFormDialog";
 import { RecipeTable } from "../components/RecipeTable";
 import type { Recipe } from "../types";
 
-const GRAIN_COLOR = "#ea580c";
 const CATEGORY_COLOR: Record<string, string> = {
   Vegetable: "#16a34a",
-  Grain:     GRAIN_COLOR,
+  Grain:     "#ca8a04",
   "Entrée":  "#dc2626",
   Fruit:     "#2563eb",
   Milk:      "#7c3aed",
-  "WG Rich": GRAIN_COLOR,
+  "WG Rich": "#ea580c",
   Protein:   "#b45309",
 };
 
