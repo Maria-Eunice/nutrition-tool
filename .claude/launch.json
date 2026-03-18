@@ -3,9 +3,15 @@
   "configurations": [
     {
       "name": "dev",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["node_modules/vite/bin/vite.js", "--host", "0.0.0.0"],
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "--host", "localhost"],
       "port": 5173
+    },
+    {
+      "name": "onboarding-html",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["serve-onboarding.cjs"],
+      "port": 8181
     }
   ]
 }
