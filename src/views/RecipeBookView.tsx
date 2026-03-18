@@ -112,7 +112,7 @@ export const RecipeBookView = () => {
             <Search size={16} className="absolute left-3 top-3" style={{ color: text.muted }} />
             <Input placeholder="Search recipes..." value={search} onChange={e => setSearch(e.target.value)} className="pl-9" />
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map(r => (
               <Card key={r.id} className="hover:shadow-md transition-shadow cursor-pointer relative">
                 <div className="absolute top-3 right-3 flex items-center gap-1 z-10">
@@ -121,7 +121,7 @@ export const RecipeBookView = () => {
                     onClick={(e) => { e.stopPropagation(); setEditingRecipe(r); setFormOpen(true); }}
                     title="Edit recipe"
                   >
-                    <Pencil size={14} color={C.blue} />
+                    <Pencil size={14} color={C.green} />
                   </button>
                   <button
                     className="p-1.5 rounded-lg hover:bg-red-50 transition-colors"
@@ -131,16 +131,16 @@ export const RecipeBookView = () => {
                     <Trash2 size={14} color="#dc2626" />
                   </button>
                 </div>
-                <div className="p-5" onClick={() => setViewRecipe(r)}>
-                  <div className="pr-16 mb-1">
+                <div className="p-6" onClick={() => setViewRecipe(r)}>
+                  <div className="pr-16 mb-2">
                     <h3 className="font-bold text-base leading-tight" style={{ fontFamily: font.header, color: text.primary }}>{r.name}</h3>
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <Badge color={C.blue}>{r.category}</Badge>
                   </div>
-                  <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="grid grid-cols-3 gap-3 text-center">
                     {[{ l: "Yield", v: r.yield }, { l: "Cal/srv", v: r.nutrition.calories }, { l: "Na mg", v: r.nutrition.sodium }].map(({ l, v }) => (
-                      <div key={l} className="rounded-lg p-2" style={{ backgroundColor: C.lightBlue }}>
+                      <div key={l} className="rounded-lg p-3" style={{ backgroundColor: C.white }}>
                         <div className="text-lg font-bold" style={{ color: C.green, fontFamily: font.header }}>{v}</div>
                         <div className="text-xs" style={{ color: text.secondary, fontFamily: font.body }}>{l}</div>
                       </div>

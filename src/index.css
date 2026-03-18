@@ -3,7 +3,7 @@
 
 /* ── Theme tokens ── */
 :root {
-  --bg-page: #f8f9fa;
+  --bg-page: #f0f5ee;
   --bg-card: #ffffff;
   --bg-sidebar: #1D363D;
   --bg-sidebar-hover: rgba(255, 255, 255, 0.08);
