@@ -8,7 +8,7 @@ import type { Recipe, MenuMap } from "../types";
 // ---------------------------------------------------------------------------
 
 const CHICKEN_TENDERS: Recipe = {
-  id: 1,
+  id: '1',
   name: "Chicken Tenders",
   category: "Entrée",
   yield: 50,
@@ -23,7 +23,7 @@ const CHICKEN_TENDERS: Recipe = {
 };
 
 const DINNER_ROLL: Recipe = {
-  id: 2,
+  id: '2',
   name: "Whole Wheat Dinner Roll",
   category: "Grain",
   yield: 100,
@@ -38,7 +38,7 @@ const DINNER_ROLL: Recipe = {
 };
 
 const BROCCOLI: Recipe = {
-  id: 3,
+  id: '3',
   name: "Steamed Broccoli",
   category: "Vegetable",
   yield: 50,

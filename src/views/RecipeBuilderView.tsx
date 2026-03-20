@@ -62,7 +62,7 @@ export const RecipeBuilderView = () => {
   const recipes = useAppStore((s) => s.recipes);
   const addRecipe = useAppStore((s) => s.addRecipe);
   const updateRecipe = useAppStore((s) => s.updateRecipe);
-  const editRecipe = id ? recipes.find((r) => r.id === Number(id)) ?? null : null;
+  const editRecipe = id ? recipes.find((r) => r.id === id) ?? null : null;
 
   const { register, handleSubmit, formState: { errors }, watch, setValue, getValues, control } = useForm<RecipeFormData>({
     resolver: zodResolver(recipeSchema),
@@ -123,7 +123,7 @@ export const RecipeBuilderView = () => {
   };
 
   const onSubmit = (data: RecipeFormData) => {
-    const recipe = { id: editRecipe?.id || Date.now(), ...data };
+    const recipe = { id: editRecipe?.id ?? '', ...data };
     if (editRecipe) updateRecipe(recipe);
     else addRecipe(recipe);
     navigate("/");

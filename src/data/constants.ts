@@ -40,7 +40,7 @@ export const LN_COMPS: MealComponent[] = [
 export const ALL_COMPS = [...BK_COMPS, ...LN_COMPS];
 
 export const MILK_ITEM = {
-  id: 99,
+  id: '99',
   name: "1% Low-Fat Milk",
   category: "Milk",
   nutrition: { calories: 100, totalFat: 2.5, saturatedFat: 1.5, transFat: 0, cholesterol: 12, sodium: 105, totalCarbs: 12, fiber: 0, totalSugars: 12, addedSugars: 0, protein: 8, vitaminD: 2.5, calcium: 305, iron: 0, potassium: 366 } as Nutrition,

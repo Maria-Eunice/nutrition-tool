@@ -23,7 +23,7 @@ export interface Nutrition {
 }
 
 export interface Recipe {
-  id: number;
+  id: string;
   name: string;
   category: string;
   yield: number;

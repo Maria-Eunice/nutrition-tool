@@ -18,7 +18,7 @@ import type { Recipe, MealComponent, MenuMap } from "../types";
 /* ── Types ─────────────────────────────────────────────────────────────── */
 
 /** Minimal recipe shape needed by the planner dropdowns. */
-type RecipeOption = { id?: number; name: string; nutrition: Recipe["nutrition"] };
+type RecipeOption = { id?: string; name: string; nutrition: Recipe["nutrition"] };
 type RecipeOptionMap = Record<string, RecipeOption[]>;
 
 // NutritionTotals is imported from ../utils/nutrition

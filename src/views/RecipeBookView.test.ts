@@ -19,7 +19,7 @@ function filterRecipes(recipes: Recipe[], search: string): Recipe[] {
 // Fixture — a small recipe list covering different categories and name shapes.
 // ---------------------------------------------------------------------------
 
-function makeRecipe(id: number, name: string, category = "Entrée"): Recipe {
+function makeRecipe(id: string, name: string, category = "Entrée"): Recipe {
   return {
     id,
     name,
@@ -37,12 +37,12 @@ function makeRecipe(id: number, name: string, category = "Entrée"): Recipe {
 }
 
 const RECIPES: Recipe[] = [
-  makeRecipe(1, "Chicken Tenders"),
-  makeRecipe(2, "Beef Taco Meat"),
-  makeRecipe(3, "Homemade Mac & Cheese", "Grain"),
-  makeRecipe(4, "Steamed Broccoli", "Vegetable"),
-  makeRecipe(5, "Chicken Noodle Soup"),
-  makeRecipe(6, "WG Blueberry Muffin", "WG Rich"),
+  makeRecipe('1', "Chicken Tenders"),
+  makeRecipe('2', "Beef Taco Meat"),
+  makeRecipe('3', "Homemade Mac & Cheese", "Grain"),
+  makeRecipe('4', "Steamed Broccoli", "Vegetable"),
+  makeRecipe('5', "Chicken Noodle Soup"),
+  makeRecipe('6', "WG Blueberry Muffin", "WG Rich"),
 ];
 
 describe("Recipe search filter", () => {

@@ -70,7 +70,6 @@ export function parseCSV(text: string): { recipes: Recipe[]; errors: string[] } 
 
   const recipes: Recipe[] = [];
   const errors: string[] = [];
-  const now = Date.now();
 
   for (let i = 1; i < lines.length; i++) {
     const cols = splitCSVRow(lines[i]);
@@ -92,7 +91,7 @@ export function parseCSV(text: string): { recipes: Recipe[]; errors: string[] } 
     }
 
     recipes.push({
-      id: now * 1000 + i,
+      id: '',
       name,
       category,
       yield: yldIdx !== undefined ? (parseInt(cols[yldIdx]) || 50) : 50,

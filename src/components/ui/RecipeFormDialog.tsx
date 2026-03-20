@@ -52,7 +52,7 @@ export const RecipeFormDialog = ({ open, onClose, recipe }: RecipeFormDialogProp
       });
     } else {
       addRecipe({
-        id: Date.now(),
+        id: '',
         name: name.trim(),
         category,
         yield: recipeYield,
