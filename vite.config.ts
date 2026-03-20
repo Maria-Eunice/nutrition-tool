@@ -6,6 +6,8 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Expose NEXT_PUBLIC_ vars to import.meta.env (in addition to VITE_)
+  envPrefix: ["VITE_", "NEXT_PUBLIC_"],
   server: {
     host: "0.0.0.0",
     port: 5173,

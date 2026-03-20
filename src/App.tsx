@@ -15,12 +15,16 @@ import { ReportsView } from "./views/ReportsView";
 import { HelpView } from "./views/HelpView";
 
 export default function App() {
-  const resetAll = useAppStore((s) => s.resetAll);
-  const sidebarOpen = useAppStore((s) => s.sidebarOpen);
+  const resetAll       = useAppStore((s) => s.resetAll);
+  const fetchRecipes   = useAppStore((s) => s.fetchRecipes);
+  const sidebarOpen    = useAppStore((s) => s.sidebarOpen);
   const setSidebarOpen = useAppStore((s) => s.setSidebarOpen);
-  const darkMode = useAppStore((s) => s.darkMode);
-  const recipes = useAppStore((s) => s.recipes);
-  const menu = useAppStore((s) => s.menu);
+  const darkMode       = useAppStore((s) => s.darkMode);
+  const recipes        = useAppStore((s) => s.recipes);
+  const menu           = useAppStore((s) => s.menu);
+
+  // Load recipes from Supabase on first mount.
+  useEffect(() => { fetchRecipes(); }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
