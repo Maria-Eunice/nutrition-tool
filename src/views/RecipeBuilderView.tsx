@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useReactToPrint } from "react-to-print";
 import { ChefHat, Save, X, Printer } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { C, font } from "../data/brand";
 import { NDB, RECIPE_CATEGORIES, EMPTY_NUTRITION } from "../data/constants";
 import { useAppStore } from "../store/useAppStore";
@@ -56,13 +56,12 @@ const FieldError = ({ message }: { message?: string }) =>
 
 /* ── Component ── */
 
-export const RecipeBuilderView = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+export const RecipeBuilderView = ({ editId }: { editId?: string } = {}) => {
+  const router = useRouter();
   const recipes = useAppStore((s) => s.recipes);
   const addRecipe = useAppStore((s) => s.addRecipe);
   const updateRecipe = useAppStore((s) => s.updateRecipe);
-  const editRecipe = id ? recipes.find((r) => r.id === id) ?? null : null;
+  const editRecipe = editId ? recipes.find((r) => r.id === editId) ?? null : null;
 
   const { register, handleSubmit, formState: { errors }, watch, setValue, getValues, control } = useForm<RecipeFormData>({
     resolver: zodResolver(recipeSchema),
@@ -126,7 +125,7 @@ export const RecipeBuilderView = () => {
     const recipe = { id: editRecipe?.id ?? '', ...data };
     if (editRecipe) updateRecipe(recipe);
     else addRecipe(recipe);
-    navigate("/");
+    router.push("/");
   };
 
   const labelStyle = { color: `${C.slate}88`, fontFamily: font.body } as const;

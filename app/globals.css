@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* ── Theme tokens ── */
+:root {
+  --bg-page: #f0f5ee;
+  --bg-card: #ffffff;
+  --bg-sidebar: #1D363D;
+  --bg-sidebar-hover: rgba(255, 255, 255, 0.08);
+  --bg-input: #ffffff;
+  --bg-hover: #f1f5f9;
+  --bg-table-header: #D5E6F1;
+  --text-primary: #1D363D;
+  --text-secondary: rgba(29, 54, 61, 0.53);
+  --text-muted: rgba(29, 54, 61, 0.33);
+  --text-on-sidebar: rgba(255, 255, 255, 0.65);
+  --border-default: rgba(29, 54, 61, 0.07);
+  --border-medium: rgba(29, 54, 61, 0.13);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --overlay: rgba(0, 0, 0, 0.3);
+}
+
+.dark {
+  --bg-page: #111827;
+  --bg-card: #1f2937;
+  --bg-sidebar: #0f172a;
+  --bg-sidebar-hover: rgba(255, 255, 255, 0.06);
+  --bg-input: #374151;
+  --bg-hover: #374151;
+  --bg-table-header: rgba(5, 102, 141, 0.25);
+  --text-primary: #f1f5f9;
+  --text-secondary: rgba(241, 245, 249, 0.6);
+  --text-muted: rgba(241, 245, 249, 0.3);
+  --text-on-sidebar: rgba(255, 255, 255, 0.65);
+  --border-default: rgba(241, 245, 249, 0.08);
+  --border-medium: rgba(241, 245, 249, 0.15);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --overlay: rgba(0, 0, 0, 0.6);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-primary);
+}

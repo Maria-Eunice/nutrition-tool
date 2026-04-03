@@ -1,3 +1,4 @@
+"use client";
 // HeaderBar: top navigation bar with logo, dark mode toggle, and action buttons.
 import { RotateCcw, Printer, Save, Info, Sun, Moon } from "lucide-react";
 import { C, font, surface, text, border } from "../../data/brand";
@@ -5,15 +6,24 @@ import { useAppStore } from "../../store/useAppStore";
 import { Btn } from "../ui/Btn";
 import { Logo } from "../ui/Logo";
 
-interface HeaderBarProps {
-  onReset: () => void;
-  onPrint: () => void;
-  onSave: () => void;
-}
-
-export const HeaderBar = ({ onReset, onPrint, onSave }: HeaderBarProps) => {
+export const HeaderBar = () => {
   const darkMode = useAppStore((s) => s.darkMode);
   const toggleDarkMode = useAppStore((s) => s.toggleDarkMode);
+  const resetAll = useAppStore((s) => s.resetAll);
+
+  const onReset = () => resetAll();
+  const onPrint = () => window.print();
+  const onSave = () => {
+    const data = localStorage.getItem("sproutcnp-store");
+    if (!data) return;
+    const blob = new Blob([data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "sproutcnp-backup.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="border-b px-4 py-3 flex flex-wrap items-center justify-between gap-3" style={{ backgroundColor: surface.card, borderColor: border.default }}>
