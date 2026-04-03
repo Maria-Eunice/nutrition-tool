@@ -1,9 +1,8 @@
 "use client";
 // HeaderBar: top navigation bar with logo, dark mode toggle, and action buttons.
-import { RotateCcw, Printer, Save, Info, Sun, Moon } from "lucide-react";
+import { RotateCcw, Printer, Save, Sun, Moon, ShieldCheck } from "lucide-react";
 import { C, font, surface, text, border } from "../../data/brand";
 import { useAppStore } from "../../store/useAppStore";
-import { Btn } from "../ui/Btn";
 import { Logo } from "../ui/Logo";
 
 export const HeaderBar = () => {
@@ -25,30 +24,77 @@ export const HeaderBar = () => {
     URL.revokeObjectURL(url);
   };
 
+  const iconBtn = "flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:opacity-80 active:scale-95";
+
   return (
-    <div className="border-b px-4 py-3 flex flex-wrap items-center justify-between gap-3" style={{ backgroundColor: surface.card, borderColor: border.default }}>
+    <header
+      className="flex items-center justify-between px-5 py-0 shrink-0"
+      style={{
+        height: 56,
+        backgroundColor: surface.card,
+        borderBottom: `1px solid ${border.default}`,
+        boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
+      }}
+    >
+      {/* ── Left: logo ── */}
       <Logo />
-      <div className="flex items-center gap-2">
-        <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold" style={{ backgroundColor: "#fef08a", color: "#854d0e", border: "1px solid #fde047", fontFamily: font.body }}>
-          Preview Test
-        </span>
-        <div className="flex items-center gap-1 text-xs" style={{ color: text.secondary, fontFamily: font.body }}>
-          <Info size={12} /> info@sproutcnp.com
-        </div>
+
+      {/* ── Centre: USDA compliance badge ── */}
+      <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
+        style={{ backgroundColor: `${C.green}18`, color: C.green, fontFamily: font.body }}>
+        <ShieldCheck size={13} />
+        USDA Compliant · v1.0
       </div>
-      <div className="flex items-center gap-2 flex-wrap">
+
+      {/* ── Right: actions ── */}
+      <div className="flex items-center gap-1">
+        {/* Dark mode toggle */}
         <button
           onClick={toggleDarkMode}
-          className="p-2 rounded-lg transition-colors"
+          className={iconBtn}
           style={{ color: text.secondary }}
           title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
         >
-          {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+          {darkMode ? <Sun size={16} /> : <Moon size={16} />}
         </button>
-        <Btn variant="outline" icon={RotateCcw} onClick={onReset}>Reset All</Btn>
-        <Btn variant="secondary" icon={Printer} onClick={onPrint}>Print Page</Btn>
-        <Btn variant="primary" icon={Save} onClick={onSave}>Save to File</Btn>
+
+        <div className="w-px h-5 mx-1" style={{ backgroundColor: border.medium }} />
+
+        {/* Print */}
+        <button
+          onClick={onPrint}
+          className={iconBtn}
+          style={{ color: text.secondary }}
+          title="Print current page"
+        >
+          <Printer size={15} />
+          <span className="hidden md:inline">Print</span>
+        </button>
+
+        {/* Save */}
+        <button
+          onClick={onSave}
+          className={iconBtn}
+          style={{ color: C.blue }}
+          title="Save backup to file"
+        >
+          <Save size={15} />
+          <span className="hidden md:inline">Save</span>
+        </button>
+
+        <div className="w-px h-5 mx-1" style={{ backgroundColor: border.medium }} />
+
+        {/* Reset */}
+        <button
+          onClick={onReset}
+          className={iconBtn}
+          style={{ color: text.muted }}
+          title="Reset all data"
+        >
+          <RotateCcw size={14} />
+          <span className="hidden md:inline text-xs">Reset</span>
+        </button>
       </div>
-    </div>
+    </header>
   );
 };

@@ -140,10 +140,10 @@ export const RecipeBuilderView = ({ editId }: { editId?: string } = {}) => {
     setIngUnit("lb");
   };
 
-  const onSubmit = (data: RecipeFormData) => {
+  const onSubmit = async (data: RecipeFormData) => {
     const recipe = { id: editRecipe?.id ?? '', ...data };
-    if (editRecipe) updateRecipe(recipe);
-    else addRecipe(recipe);
+    if (editRecipe) await updateRecipe(recipe);
+    else await addRecipe(recipe);
     router.push("/");
   };
 
