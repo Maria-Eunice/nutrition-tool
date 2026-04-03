@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Leaf, BookOpen, ChefHat, CheckCircle, CalendarDays, BarChart3, HelpCircle } from "lucide-react";
 import { C, font, surface } from "../../data/brand";
+import { Logo } from "../ui/Logo";
 import { useAppStore } from "../../store/useAppStore";
 import { cn } from "../../lib/utils";
 
@@ -62,12 +63,7 @@ export const AppSidebar = () => {
     >
       {/* ── Logo ── */}
       <div className="p-5 border-b" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
-        <div className="flex items-center justify-center gap-1">
-          <span className="text-lg font-black tracking-tight" style={{ fontFamily: font.header, fontWeight: 900, color: C.green }}>
-            Sprou<span className="relative">t<span className="absolute -top-0.5 -right-0.5" style={{ color: C.green, fontSize: 8 }}>🌿</span></span>
-          </span>
-          <span className="text-lg font-black tracking-tight" style={{ fontFamily: font.header, fontWeight: 900, color: C.lightBlue }}>CNP</span>
-        </div>
+        <Logo size="sm" />
         <div className="text-center mt-1 text-xs font-medium tracking-wider uppercase" style={{ color: "rgba(255,255,255,0.4)", fontFamily: font.body }}>Menu Manager</div>
       </div>
 
