@@ -3,10 +3,8 @@
 // all queries will fail gracefully (fetchRecipes falls back to INITIAL_RECIPES).
 import { createBrowserClient } from "@supabase/ssr";
 
-const supabaseUrl = import.meta.env.NEXT_PUBLIC_SUPABASE_URL  as string
-  || "https://placeholder.supabase.co";
-const supabaseKey = import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-  || "placeholder-key";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co";
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-key";
 
 if (
   supabaseUrl === "https://placeholder.supabase.co" ||

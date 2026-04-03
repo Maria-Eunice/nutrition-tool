@@ -1,4 +1,6 @@
-import { NavLink } from "react-router-dom";
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Leaf, BookOpen, ChefHat, CheckCircle, CalendarDays, BarChart3, HelpCircle } from "lucide-react";
 import { C, font, surface } from "../../data/brand";
 import { useAppStore } from "../../store/useAppStore";
@@ -12,40 +14,37 @@ const NAV = [
   { to: "/reports", label: "Reports", Icon: BarChart3 },
 ];
 
-/** Reusable NavLink renderer — shared between the main and bottom nav lists. */
+/** Reusable nav link — uses Next.js Link with active state via usePathname. */
 const NavItem = ({
   to,
   label,
   Icon,
-  end = false,
   onNavigate,
 }: {
   to: string;
   label: string;
   Icon: React.ComponentType<{ size?: number; fill?: string; color?: string }>;
-  end?: boolean;
   onNavigate: () => void;
-}) => (
-  <NavLink
-    to={to}
-    end={end}
-    onClick={onNavigate}
-    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all no-underline"
-    style={({ isActive }) =>
-      isActive
-        ? { backgroundColor: C.green, color: "#fff", fontFamily: font.body }
-        : { backgroundColor: "transparent", color: "rgba(255,255,255,0.65)", fontFamily: font.body }
-    }
-  >
-    {({ isActive }) => (
-      <>
-        <Icon size={18} fill={isActive ? "#fff" : "none"} color={isActive ? "#fff" : "rgba(255,255,255,0.5)"} />
-        {label}
-        {isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.yellow }} />}
-      </>
-    )}
-  </NavLink>
-);
+}) => {
+  const pathname = usePathname();
+  const isActive = to === "/" ? pathname === "/" : pathname.startsWith(to);
+  return (
+    <Link
+      href={to}
+      onClick={onNavigate}
+      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all no-underline"
+      style={
+        isActive
+          ? { backgroundColor: C.green, color: "#fff", fontFamily: font.body }
+          : { backgroundColor: "transparent", color: "rgba(255,255,255,0.65)", fontFamily: font.body }
+      }
+    >
+      <Icon size={18} fill={isActive ? "#fff" : "none"} color={isActive ? "#fff" : "rgba(255,255,255,0.5)"} />
+      {label}
+      {isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full" style={{ backgroundColor: C.yellow }} />}
+    </Link>
+  );
+};
 
 export const AppSidebar = () => {
   const sidebarOpen = useAppStore((s) => s.sidebarOpen);
@@ -75,7 +74,7 @@ export const AppSidebar = () => {
       {/* ── Main navigation ── */}
       <nav className="flex-1 p-3 space-y-1">
         {NAV.map(({ to, label, Icon }) => (
-          <NavItem key={to} to={to} label={label} Icon={Icon} end={to === "/"} onNavigate={close} />
+          <NavItem key={to} to={to} label={label} Icon={Icon} onNavigate={close} />
         ))}
       </nav>
 

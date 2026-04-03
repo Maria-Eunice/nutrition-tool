@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
 import { Edit, Printer } from "lucide-react";
 import { C, font, text, border } from "../data/brand";
@@ -20,7 +20,7 @@ import { PrintableNutritionFacts } from "./PrintableNutritionFacts";
 export const RecipeDetailDialog = () => {
   const viewRecipe = useAppStore((s) => s.viewRecipe);
   const setViewRecipe = useAppStore((s) => s.setViewRecipe);
-  const navigate = useNavigate();
+  const router = useRouter();
   const printRef = useRef<HTMLDivElement>(null);
 
   const handlePrintLabel = useReactToPrint({
@@ -63,7 +63,7 @@ export const RecipeDetailDialog = () => {
               <Btn
                 variant="outline"
                 icon={Edit}
-                onClick={() => { setViewRecipe(null); navigate(`/builder/${viewRecipe.id}`); }}
+                onClick={() => { setViewRecipe(null); router.push(`/builder/${viewRecipe.id}`); }}
               >
                 Edit Recipe
               </Btn>

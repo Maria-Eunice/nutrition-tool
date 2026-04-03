@@ -1,3 +1,4 @@
+"use client";
 // Supabase is the source of truth for recipes. Call fetchRecipes() on app mount.
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
