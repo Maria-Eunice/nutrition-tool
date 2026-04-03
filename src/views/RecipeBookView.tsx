@@ -118,45 +118,45 @@ export const RecipeBookView = () => {
       {/* ── Grid View ── */}
       {viewMode === "grid" && (
         <>
-          <div className="relative max-w-lg mb-6 mt-2">
-            <Search size={16} className="absolute left-3 top-3.5" style={{ color: text.muted }} />
-            <Input placeholder="Search recipes..." value={search} onChange={e => setSearch(e.target.value)} className="pl-9 h-11 text-sm" />
+          <div className="relative max-w-xl mb-8 mt-6">
+            <Search size={17} className="absolute left-4 top-3.5" style={{ color: text.muted }} />
+            <Input placeholder="Search recipes..." value={search} onChange={e => setSearch(e.target.value)} className="pl-11 h-12 text-sm" />
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-7 sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
             {filtered.map(r => (
-              <Card key={r.id} className="hover:shadow-lg transition-shadow cursor-pointer relative">
-                <div className="absolute top-4 right-4 flex items-center gap-1 z-10">
+              <Card key={r.id} className="hover:shadow-xl transition-shadow cursor-pointer relative">
+                <div className="absolute top-5 right-5 flex items-center gap-1 z-10">
                   <button
                     className="p-2 rounded-lg hover:bg-blue-50 transition-colors"
                     onClick={(e) => { e.stopPropagation(); setEditingRecipe(r); setFormOpen(true); }}
                     title="Edit recipe"
                   >
-                    <Pencil size={15} color={C.green} />
+                    <Pencil size={16} color={C.green} />
                   </button>
                   <button
                     className="p-2 rounded-lg hover:bg-red-50 transition-colors"
                     onClick={(e) => { e.stopPropagation(); setDeleteTarget(r); }}
                     title="Delete recipe"
                   >
-                    <Trash2 size={15} color="#dc2626" />
+                    <Trash2 size={16} color="#dc2626" />
                   </button>
                 </div>
-                <div className="p-7" onClick={() => setViewRecipe(r)}>
-                  <div className="pr-20 mb-3">
-                    <h3 className="font-bold text-lg leading-snug" style={{ fontFamily: font.header, color: text.primary }}>{r.name}</h3>
+                <div className="p-8" onClick={() => setViewRecipe(r)}>
+                  <div className="pr-20 mb-4">
+                    <h3 className="font-bold text-xl leading-snug" style={{ fontFamily: font.header, color: text.primary }}>{r.name}</h3>
                   </div>
-                  <div className="mb-5">
+                  <div className="mb-6">
                     <Badge color={CATEGORY_COLOR[r.category] ?? C.blue}>{r.category}</Badge>
                   </div>
-                  <div className="grid grid-cols-3 gap-3 text-center">
-                    {[{ l: "Yield", v: r.yield }, { l: "Cal/srv", v: r.nutrition.calories }, { l: "Na mg", v: r.nutrition.sodium }].map(({ l, v }) => (
-                      <div key={l} className="rounded-xl py-4 px-2" style={{ backgroundColor: `${C.green}0D` }}>
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    {[{ l: "Yield", v: r.yield }, { l: "Cal/srv", v: r.nutrition.calories }, { l: "Sodium mg", v: r.nutrition.sodium }].map(({ l, v }) => (
+                      <div key={l} className="rounded-xl py-5 px-3" style={{ backgroundColor: `${C.green}0D` }}>
                         <div className="text-2xl font-bold" style={{ color: C.green, fontFamily: font.header }}>{v}</div>
-                        <div className="text-xs mt-1" style={{ color: text.secondary, fontFamily: font.body }}>{l}</div>
+                        <div className="text-xs mt-1.5" style={{ color: text.secondary, fontFamily: font.body }}>{l}</div>
                       </div>
                     ))}
                   </div>
-                  <div className="mt-4 text-xs" style={{ color: text.secondary, fontFamily: font.body }}>Serving: {r.servingSize}</div>
+                  <div className="mt-5 text-sm" style={{ color: text.secondary, fontFamily: font.body }}>Serving: {r.servingSize}</div>
                 </div>
               </Card>
             ))}
