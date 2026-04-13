@@ -8,7 +8,7 @@ export const C = {
 };
 
 export const font = {
-  header: "'Roboto Slab', 'Arial Black', sans-serif",
+  header: "'Helvetica Neue', Helvetica, Arial, sans-serif",
   body: "'Montserrat', Arial, sans-serif",
 };
 
